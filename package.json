@@ -21,7 +21,12 @@
   },
   "homepage": "https://github.com/rhkdgns95/recoil-logger-lite/blob/master/README.md",
   "scripts": {
-    "publish": "npm publish"
+    "prepublish:patch": "npm version patch",
+    "publish:patch": "npm publish",
+    "prepublish:minor": "npm version minor",
+    "publish:minor": "npm publish",
+    "prepublish:major": "npm version major",
+    "publish:major": "npm publish"
   },
   "dependencies": {
     "react": "^17.0.1",
