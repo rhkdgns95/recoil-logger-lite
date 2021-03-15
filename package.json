@@ -6,7 +6,13 @@
   "description": "Recoil (logity) print state change information",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
-  "repository": "https://github.com/rhkdgns95/recoil-logger-lite",
+  "repository": {
+		"type": "git",
+		"url": "git+https://github.com/rhkdgns95/recoil-logger-lite.git"
+	},
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "author": "KimKwangHoon",
   "keywords": [
     "react",
