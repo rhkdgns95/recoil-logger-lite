@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/rhkdgns95/recoil-logger-lite.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/rhkdgns95/recoil-logger-lite"
+  },
   "author": "KimKwangHoon",
   "keywords": [
     "react",

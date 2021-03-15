@@ -40,4 +40,5 @@ export const userAtom = atom<IUser>({
 ```
 
 ## screenshot
+![capture1](./capture1.png)
 ![exam](./screenshot.gif)
