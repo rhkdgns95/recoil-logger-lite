@@ -1,0 +1,37 @@
+{
+  "private": false,
+  "license": "MIT",
+  "name": "recoil-logger-lite",
+  "version": "0.0.1",
+  "description": "Recoil (logity) print state change information",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
+  "repository": "https://github.com/rhkdgns95/recoil-logger-lite",
+  "author": "KimKwangHoon",
+  "keywords": [
+    "react",
+    "react-native",
+    "recoil",
+    "recoil-logger",
+    "recoil-logger-lite",
+    "recoil-devtools"
+  ],
+  "bugs": {
+    "url": "https://github.com/rhkdgns95/recoil-logger-lite/issues"
+  },
+  "homepage": "https://github.com/rhkdgns95/recoil-logger-lite/blob/master/README.md",
+  "scripts": {
+    "publish": "npm publish"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "recoil": "^0.1.3"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^4.2.3"
+  }
+}
