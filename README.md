@@ -1,6 +1,7 @@
 # recoil-logger-lite
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rhkdgns95/recoil-logger-lite/blob/master/LICENSE)
 - Recoil (logity) print state change information.
+- [Demo](https://codesandbox.io/s/recoil-logger-lite-example-forked-vkuty)
 
 
 ## install
