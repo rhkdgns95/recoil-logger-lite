@@ -1,17 +1,16 @@
 import { useEffect } from "react";
-import { AtomEffect, useRecoilSnapshot } from "recoil";
+import { AtomEffect, RecoilState, useRecoilSnapshot } from "recoil";
 
 export function DebugObserver(): React.ReactNode {
   const snapshot = useRecoilSnapshot();
   useEffect(() => {
-    for (const node of snapshot.getNodes_UNSTABLE({
-      isModified: true,
-    }) as any) {
-      if (node?.nextState && node?.prevState && node?.date) {
+    setTimeout(() => {
+      const nodes = snapshot.getNodes_UNSTABLE({ isModified: true });
+      const node: RecoilState<any> & { nextState?: object, prevState?: object, date?: Date } = [].concat.apply([], Array.from(nodes))[0];
+      if (node && node.prevState && node.nextState && node.date) {
         const { prevState, nextState, date } = node;
         console.group(
-          `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] @ ${
-            node.key
+          `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] @ ${node.key
           }`
         );
         console.debug(
@@ -32,7 +31,7 @@ export function DebugObserver(): React.ReactNode {
         delete node.prevState;
         delete node.date;
       }
-    }
+    });
   }, [snapshot]);
   return null;
 }

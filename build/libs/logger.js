@@ -3,11 +3,10 @@ import { useRecoilSnapshot } from "recoil";
 export function DebugObserver() {
     var snapshot = useRecoilSnapshot();
     useEffect(function () {
-        for (var _i = 0, _a = snapshot.getNodes_UNSTABLE({
-            isModified: true,
-        }); _i < _a.length; _i++) {
-            var node = _a[_i];
-            if ((node === null || node === void 0 ? void 0 : node.nextState) && (node === null || node === void 0 ? void 0 : node.prevState) && (node === null || node === void 0 ? void 0 : node.date)) {
+        setTimeout(function () {
+            var nodes = snapshot.getNodes_UNSTABLE({ isModified: true });
+            var node = [].concat.apply([], Array.from(nodes))[0];
+            if (node && node.prevState && node.nextState && node.date) {
                 var prevState = node.prevState, nextState = node.nextState, date = node.date;
                 console.group("[" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "] @ " + node.key);
                 console.debug("%c prev state: ", "color: #949394; font-weight: bold;", prevState);
@@ -20,7 +19,7 @@ export function DebugObserver() {
                 delete node.prevState;
                 delete node.date;
             }
-        }
+        });
     }, [snapshot]);
     return null;
 }
