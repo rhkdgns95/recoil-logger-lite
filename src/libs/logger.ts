@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { AtomEffect, useRecoilSnapshot } from "recoil";
 
-export function DebugObserver(): React.Node {
+export function DebugObserver(): React.ReactNode {
   const snapshot = useRecoilSnapshot();
   useEffect(() => {
     for (const node of snapshot.getNodes_UNSTABLE({
@@ -34,16 +34,6 @@ export function DebugObserver(): React.Node {
       }
     }
   }, [snapshot]);
-
-  // useRecoilTransactionObserver_UNSTABLE(({snapshot}) => {
-  //   window.myDebugState = {
-  //     a: snapshot.getLoadable(atomA).contents,
-  //     b: snapshot.getLoadable(atomB).contents,
-  //   };
-  // });
-  // console.log('window.myDebugState: ', window.myDebugState);
-  return null;
-
   return null;
 }
 
