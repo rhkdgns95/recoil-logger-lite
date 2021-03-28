@@ -14,7 +14,28 @@ npm install -D recoil-logger-lite
 ```
 
 ## example
-```ts
+> index.tsx
+```tsx
+import React from "react";
+import ReactDOM from 'react';
+import { App } from "./App";
+import { RecoilRoot } from 'recoil';
+import { DebugObserver } from 'recoil-logger-lite';
+
+ReactDOM.render(
+    <RecoilRoot>
+        <App />
+        {
+            process.env.NODE_ENV !== 'production' && (
+                <DebugObserver />
+            )
+        }
+    </RecoilRoot>
+    , document.getElementById("root"));
+```
+
+> src/recoil/atom.ts
+```tsx
 import { atom } from "recoil";
 import { effects_UNSTABLE } from "recoil-logger-lite";
 
