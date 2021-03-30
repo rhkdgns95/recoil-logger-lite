@@ -2,17 +2,16 @@ import { Fragment as _Fragment, jsx as _jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useRecoilSnapshot } from "recoil";
 export var DebugObserver = function (_a) {
-    var _b = _a.printType, printType = _b === void 0 ? "object" : _b;
+    var _b = _a.type, type = _b === void 0 ? "object" : _b;
     var snapshot = useRecoilSnapshot();
     useEffect(function () {
-        for (var _i = 0, _a = snapshot.getNodes_UNSTABLE({
-            isModified: true,
-        }); _i < _a.length; _i++) {
-            var node = _a[_i];
-            if ((node === null || node === void 0 ? void 0 : node.nextState) && (node === null || node === void 0 ? void 0 : node.prevState) && (node === null || node === void 0 ? void 0 : node.date)) {
+        setTimeout(function () {
+            var nodes = snapshot.getNodes_UNSTABLE({ isModified: true });
+            var node = [].concat.apply([], Array.from(nodes))[0];
+            if (node && node.prevState && node.nextState && node.date) {
                 var prevState = node.prevState, nextState = node.nextState, date = node.date;
-                var p = printType === "object" ? prevState : "\n" + JSON.stringify(prevState);
-                var n = printType === "object" ? nextState : "\n" + JSON.stringify(nextState);
+                var p = type === "object" ? prevState : "\n" + JSON.stringify(prevState);
+                var n = type === "object" ? nextState : "\n" + JSON.stringify(nextState);
                 console.group("[" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "] @ " + node.key);
                 console.debug("%c prev state: ", "color: #949394; font-weight: bold;", p);
                 console.debug("%c Node:", "color: #009ff2; font-weight: bold;", {
@@ -24,7 +23,7 @@ export var DebugObserver = function (_a) {
                 delete node.prevState;
                 delete node.date;
             }
-        }
+        });
     }, [snapshot]);
     return _jsx(_Fragment, {}, void 0);
 };

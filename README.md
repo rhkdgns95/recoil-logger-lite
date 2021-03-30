@@ -3,6 +3,8 @@
 - Recoil (logity) print state change information.
 - [Demo](https://codesandbox.io/s/recoil-logger-lite-example-forked-vkuty)
 
+![main_exam](./screenshot2.gif)
+
 
 ## install
 ```bash
@@ -14,7 +16,28 @@ npm install -D recoil-logger-lite
 ```
 
 ## example
-```ts
+> index.tsx
+```tsx
+import React from "react";
+import ReactDOM from 'react';
+import { App } from "./App";
+import { RecoilRoot } from 'recoil';
+import { DebugObserver } from 'recoil-logger-lite';
+
+ReactDOM.render(
+    <RecoilRoot>
+        <App />
+        {
+            process.env.NODE_ENV !== 'production' && (
+                <DebugObserver type="object" /> // print type:  (Default) "object" | "string"
+            )
+        }
+    </RecoilRoot>
+    , document.getElementById("root"));
+```
+
+> src/recoil/atom.ts
+```tsx
 import { atom } from "recoil";
 import { effects_UNSTABLE } from "recoil-logger-lite";
 

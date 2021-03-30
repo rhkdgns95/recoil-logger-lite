@@ -1,25 +1,29 @@
 import React from "react";
 import { useEffect } from "react";
-import { AtomEffect, useRecoilSnapshot } from "recoil";
+import { AtomEffect, RecoilState, useRecoilSnapshot } from "recoil";
 
 type TPrintType = "string" | "object";
 
 interface IProps {
-  printType?: TPrintType;
+  type?: TPrintType;
 }
 
-export const DebugObserver: React.FC<IProps> = ({ printType = "object" }) => {
+export const DebugObserver: React.FC<IProps> = ({ type = "object" }) => {
   const snapshot = useRecoilSnapshot();
   useEffect(() => {
-    for (const node of snapshot.getNodes_UNSTABLE({
-      isModified: true,
-    }) as any) {
-      if (node?.nextState && node?.prevState && node?.date) {
+    setTimeout(() => {
+      const nodes = snapshot.getNodes_UNSTABLE({ isModified: true });
+      const node: RecoilState<any> & {
+        nextState?: object;
+        prevState?: object;
+        date?: Date;
+      } = [].concat.apply([], Array.from(nodes))[0];
+      if (node && node.prevState && node.nextState && node.date) {
         const { prevState, nextState, date } = node;
         const p =
-          printType === "object" ? prevState : "\n" + JSON.stringify(prevState);
+          type === "object" ? prevState : "\n" + JSON.stringify(prevState);
         const n =
-          printType === "object" ? nextState : "\n" + JSON.stringify(nextState);
+          type === "object" ? nextState : "\n" + JSON.stringify(nextState);
 
         console.group(
           `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] @ ${
@@ -44,7 +48,7 @@ export const DebugObserver: React.FC<IProps> = ({ printType = "object" }) => {
         delete node.prevState;
         delete node.date;
       }
-    }
+    });
   }, [snapshot]);
   return <></>;
 };
