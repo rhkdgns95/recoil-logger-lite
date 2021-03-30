@@ -1,7 +1,14 @@
+import React from "react";
 import { useEffect } from "react";
 import { AtomEffect, useRecoilSnapshot } from "recoil";
 
-export function DebugObserver(): React.ReactNode {
+type TPrintType = "string" | "object";
+
+interface IProps {
+  printType?: TPrintType;
+}
+
+export const DebugObserver: React.FC<IProps> = ({ printType = "object" }) => {
   const snapshot = useRecoilSnapshot();
   useEffect(() => {
     for (const node of snapshot.getNodes_UNSTABLE({
@@ -9,6 +16,11 @@ export function DebugObserver(): React.ReactNode {
     }) as any) {
       if (node?.nextState && node?.prevState && node?.date) {
         const { prevState, nextState, date } = node;
+        const p =
+          printType === "object" ? prevState : "\n" + JSON.stringify(prevState);
+        const n =
+          printType === "object" ? nextState : "\n" + JSON.stringify(nextState);
+
         console.group(
           `[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] @ ${
             node.key
@@ -17,7 +29,7 @@ export function DebugObserver(): React.ReactNode {
         console.debug(
           "%c prev state: ",
           "color: #949394; font-weight: bold;",
-          prevState
+          p
         );
         console.debug("%c Node:", "color: #009ff2; font-weight: bold;", {
           node,
@@ -25,7 +37,7 @@ export function DebugObserver(): React.ReactNode {
         console.debug(
           "%c next state: ",
           "color: #43a547; font-weight: bold;",
-          nextState
+          n
         );
         console.groupEnd();
         delete node.nextState;
@@ -34,8 +46,8 @@ export function DebugObserver(): React.ReactNode {
       }
     }
   }, [snapshot]);
-  return null;
-}
+  return <></>;
+};
 
 export const effects_UNSTABLE: readonly AtomEffect<any>[] | undefined = [
   ({ onSet, node }) => {

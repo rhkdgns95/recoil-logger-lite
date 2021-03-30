@@ -1,12 +1,16 @@
-import { useRecoilState } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
+import { DebugObserver } from "recoil-logger-lite";
+
 import { countAtom, userAtom } from "./atoms";
 
 export const App = () => {
   return (
-    <>
+    <RecoilRoot>
       <Count />
       <User />
-    </>
+      {/* type:  (Default) "object" | "string" */}
+      <DebugObserver printType="object" />
+    </RecoilRoot>
   );
 };
 
