@@ -1,5 +1,6 @@
 # recoil-logger-lite
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rhkdgns95/recoil-logger-lite/blob/master/LICENSE)
+![recoil](https://img.shields.io/npm/dm/recoil-logger-lite.svg?maxAge=2592000?style=plastic)
 - Recoil (logity) print state change information.
 - [Demo](https://codesandbox.io/s/recoil-logger-lite-example-forked-vkuty)
 
